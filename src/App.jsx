@@ -7,6 +7,8 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
+import Header from './Components/Header';
+import Footer from './Components/Footer';
 
 function App() {
   const [pamount, setPamount] = useState('');
@@ -50,42 +52,82 @@ function App() {
   };
 
   return (
-    <Container maxWidth="sm">
-      <Box sx={{ bgcolor: '#FECD45', mt: 8, p: 6, borderRadius: 1 }}>
-        <Typography variant="h4" component="h1" gutterBottom>
-          Simple Interest Calculator
-        </Typography>
-        <Paper elevation={3} sx={{ p: 2, mb: 3 }}>
-          <Typography variant="h5" component="h2">
-            ₹ {result}
+    <div>
+      <Header />
+      <Container maxWidth="sm" className="container">
+        <Box className="app-content">
+          <Typography variant="h4" component="h1" gutterBottom className="title">
+            Simple Interest Calculator
           </Typography>
-        </Paper>
-        <form onSubmit={submitted}>
-          <div className='mt-2'>
-            <TextField id="outlined-basic" name='pamount' value={pamount} onChange={validInput} style={{width:'100%'}} label="₹ Principle Amount" variant="outlined" />
-            {!validpamount && <div className='text-danger'>Invalid Principle Amount</div>}
-          </div>
-          <div className='mt-2'>
-            <TextField id="outlined-basic" name='rate' value={rate} onChange={validInput} style={{width:'100%'}} label="% Rate" variant="outlined" />
-            {!validrate && <div className='text-danger'>Invalid Rate</div>}
-          </div>
-          <div className='mt-2'>
-            <TextField id="outlined-basic" name='time' value={time} onChange={validInput} style={{width:'100%'}} label="Time" variant="outlined" />
-            {!validtime && <div className='text-danger'>Invalid Duration</div>}
-          </div>
-          <div className='mt-2'>  
-            <Stack spacing={2} direction="row">
-              <Button variant="contained" disabled={!validpamount || !validrate || !validtime} type='submit'>
-                Submit
-              </Button>
-              <Button variant="contained" onClick={reset}>
-                Reset
-              </Button>
-            </Stack>
-          </div>
-        </form>
-      </Box>
-    </Container>
+          <Paper elevation={3} className="paper">
+            <Typography variant="h5" component="h2">
+              ₹ {result}
+            </Typography>
+          </Paper>
+          <form onSubmit={submitted}>
+            <div className='mt-2'>
+              <TextField
+                id="outlined-basic"
+                name='pamount'
+                value={pamount}
+                onChange={validInput}
+                style={{ width: '100%' }}
+                label="₹ Principle Amount"
+                variant="outlined"
+                error={!validpamount}
+                helperText={!validpamount && 'Invalid Principle Amount'}
+              />
+            </div>
+            <div className='mt-2'>
+              <TextField
+                id="outlined-basic"
+                name='rate'
+                value={rate}
+                onChange={validInput}
+                style={{ width: '100%' }}
+                label="% Rate"
+                variant="outlined"
+                error={!validrate}
+                helperText={!validrate && 'Invalid Rate'}
+              />
+            </div>
+            <div className='mt-2'>
+              <TextField
+                id="outlined-basic"
+                name='time'
+                value={time}
+                onChange={validInput}
+                style={{ width: '100%' }}
+                label="Time"
+                variant="outlined"
+                error={!validtime}
+                helperText={!validtime && 'Invalid Duration'}
+              />
+            </div>
+            <div className='mt-2'>
+              <Stack spacing={2} direction="row">
+                <Button
+                  className="button-primary"
+                  variant="contained"
+                  disabled={!validpamount || !validrate || !validtime}
+                  type='submit'
+                >
+                  Submit
+                </Button>
+                <Button
+                  className="button-secondary"
+                  variant="contained"
+                  onClick={reset}
+                >
+                  Reset
+                </Button>
+              </Stack>
+            </div>
+          </form>
+        </Box>
+      </Container>
+      <Footer />
+    </div>
   );
 }
 
